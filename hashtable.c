@@ -3,6 +3,11 @@
 #include <string.h>
 #include "hashtable.h"
 
+#define ht_MINSIZE 8
+#define ht_PERTURB_SHIFT 5
+
+ht_entry ht_DEL_SENTINEL = {NULL, NULL, 0};
+
 // Python 2.7 hash function
 static long ht_hash(const unsigned char* s) {
     long x = *s << 7;
@@ -13,17 +18,16 @@ static long ht_hash(const unsigned char* s) {
     return x ^ len; 
 }
 
-static ht_entry* ht_create_entry(const char* k, const char* v) {
+static ht_entry* ht_create_entry(const char* k, void* v) {
     ht_entry* e = malloc(sizeof(ht_entry)); 
     e->key = strdup(k);
-    e->value = strdup(v);
+    e->value = v;
     e->hash = ht_hash(k);
     return e;
 }
 
 static void ht_delete_entry(ht_entry* e) {
     free(e->key);
-    free(e->value);
     free(e);
 }
 
@@ -107,12 +111,12 @@ void ht_delete_table(hashtable* ht) {
     free(ht);
 }
 
-void ht_insert(hashtable* ht, const char* k, const char* v) {
+void ht_insert(hashtable* ht, const char* k, void* v) {
     ht_entry* e = ht_create_entry(k, v);
     ht_insert_entry(ht, e);
 }
 
-char* ht_search(hashtable* ht, const char* k) {
+void* ht_search(hashtable* ht, const char* k) {
     int i = ht_hash(k);
     int perturb = i;
     ht_entry* temp = ht->table[i & ht->mask];
@@ -152,9 +156,21 @@ void ht_print_kv(hashtable* ht) {
     puts("{");
     while (--size >= 0) {
         if (*entries != NULL && *entries != &ht_DEL_SENTINEL) {
-            printf("%s : %s,\n", (*entries)->key, (*entries)->value);
+            printf("%s : %s,\n", (*entries)->key, (char *)((*entries)->value));
         }
         *entries++;
     }
     puts("}");
 }
+
+//int main() {
+//    hashtable* ht = ht_init_table();
+//    char* s1 = strdup("asdf");
+//    char* s2 = strdup("fdsa");
+//    ht_insert(ht, "test", s1);
+//    ht_insert(ht, "post", s2);
+//    ht_print_kv(ht);
+//    ht_delete_table(ht);
+//    free(s1);
+//    free(s2);
+//}

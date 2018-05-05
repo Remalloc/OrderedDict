@@ -3,7 +3,7 @@
 #include <string.h>
 #include "linkedlist.h"
 
-ll_node* ll_append_node(ll_node* prev, char* v) {
+ll_node* ll_append_node(ll_node* prev, const char* v) {
     ll_node* node = malloc(sizeof(ll_node));
     node->value = strdup(v);
     node->next = NULL;
