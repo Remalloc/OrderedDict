@@ -1,7 +1,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
-#include "ht.h"
+#include "hashtable.h"
 
 // Python 2.7 hash function
 static long ht_hash(const unsigned char* s) {
@@ -144,4 +144,17 @@ void ht_delete(hashtable* ht, const char* k) {
         temp = ht->table[i & ht->mask];
     }
     ht->used--;
+}
+
+void ht_print_kv(hashtable* ht) {
+    int size = ht->mask + 1;
+    ht_entry** entries = ht->table;
+    puts("{");
+    while (--size >= 0) {
+        if (*entries != NULL && *entries != &ht_DEL_SENTINEL) {
+            printf("%s : %s,\n", (*entries)->key, (*entries)->value);
+        }
+        *entries++;
+    }
+    puts("}");
 }
