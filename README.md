@@ -1,9 +1,10 @@
 # C Ordered Dictionary Example Implementation
 **Author:** Andrew Quach
 
-## Resources Used
+## Resources and Acknowledgment
 - Chapter 18 of Beautiful Code By Andy Oram, Greg Wilson.
 - James Routley's [Write a Hash Table](https://github.com/jamesroutley/write-a-hash-table) tutorial.
+- [Stanislav Lyakhov](https://github.com/Stan-sst/) for Valgrind assistance.
 
 ## Hash Table Implementation
 This repo is an attempt at building Python's ordered dictionary in C. The hash table uses the Python 2.7 hash function.
