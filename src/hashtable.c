@@ -162,15 +162,3 @@ void ht_print_kv(hashtable* ht) {
     }
     puts("}");
 }
-
-//int main() {
-//    hashtable* ht = ht_init_table();
-//    char* s1 = strdup("asdf");
-//    char* s2 = strdup("fdsa");
-//    ht_insert(ht, "test", s1);
-//    ht_insert(ht, "post", s2);
-//    ht_print_kv(ht);
-//    ht_delete_table(ht);
-//    free(s1);
-//    free(s2);
-//}
