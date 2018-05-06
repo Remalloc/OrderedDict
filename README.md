@@ -54,7 +54,7 @@ Small dictionary optimizations and other special case optimizations are not impl
 
 The ordered dictionary uses two hash tables and a doubly-linked list to maintain constant time insertion, searching, and deletion.
 
-Hash table 1 (dict_kv) holds the standard key-value pairs. The linked list holds the keys in order of insertion. Hash table 2 (dict_kh holds key-node address pairs. 
+Hash table 1 (dict_kv) holds the standard key-value pairs. The linked list holds the keys in order of insertion. Hash table 2 (dict_kh) holds key-node address pairs. 
 
 Insertion appends the key to the linked list [O(1)], adds the key-value pair to hash table 1 [O(1)], then adds the key-node address pair to hash table 2 [O(1)].
 
