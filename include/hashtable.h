@@ -27,5 +27,5 @@ void ht_delete_table(hashtable* ht);
 void ht_insert(hashtable* ht, const char* k, void* v);
 void* ht_search(hashtable* ht, const char* k);
 void ht_delete(hashtable* ht, const char* k);
-
+void ht_print_kv(hashtable* ht);
 #endif
